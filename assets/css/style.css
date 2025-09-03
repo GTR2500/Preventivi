@@ -1,13 +1,25 @@
 :root{
+  /* Tema chiaro (default) */
   --bg:#f7f8fb;
   --card:#ffffff;
   --text:#1a1f2b;
   --muted:#6b7280;
   --line:#e9ecf3;
-  --brand:#ff7a00;      /* arancio Grimaldelli style */
-  --accent:#2f6feb;     /* azzurrino per badge/azioni */
+
+  --brand:#ff7a00;      /* arancione Grimaldelli */
+  --accent:#2f6feb;     /* azzurro azioni */
   --radius:16px;
 }
+
+/* Tema scuro: togglato via .theme-dark su <html> */
+html.theme-dark{
+  --bg:#0b0f16;
+  --card:#121826;
+  --text:#e7ebf3;
+  --muted:#9aa4b2;
+  --line:#1c2a42;
+}
+
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -25,21 +37,29 @@ body{
   padding:10px 16px;
   background:#fff; border-bottom:1px solid var(--line);
 }
+html.theme-dark .app-header{ background:var(--card); }
+
 .header-left,.header-center,.header-right{display:flex;align-items:center}
 .header-left{justify-content:flex-start}
 .header-center{justify-content:center}
 .header-right{justify-content:flex-end; gap:10px; flex-wrap:wrap}
-.app-header img#companyLogo{height:40px; width:auto; display:block}
+.app-header img#companyLogo{height:80px; width:auto; display:block} /* LOGO x2 */
 
-h1{margin:0;font-size:20px;letter-spacing:.2px}
+h1{
+  margin:0;
+  font-size:20px;
+  letter-spacing:.2px;
+  color:var(--brand);              /* TITOLO ARANCIONE */
+}
 
 /* Buttons & badge */
 .btn{
   display:inline-flex; align-items:center; gap:8px;
   padding:8px 12px; border:1px solid var(--line);
   background:#fff; border-radius:12px; cursor:pointer;
-  transition:.15s ease; font-weight:600;
+  transition:.15s ease; font-weight:600; color:var(--text);
 }
+html.theme-dark .btn{ background:var(--card); }
 .btn:hover{transform:translateY(-1px)}
 .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
 .btn.ghost{background:transparent}
@@ -50,24 +70,44 @@ h1{margin:0;font-size:20px;letter-spacing:.2px}
   background:rgba(47,111,235,.12); color:var(--accent); border:1px solid rgba(47,111,235,.25);
 }
 
+/* Theme toggle: mostra solo l’icona attiva via JS */
+#themeToggle .moon{display:none}
+
 /* Layout */
 .container{max-width:1120px;margin:18px auto;padding:0 14px}
+.container.small{max-width:1120px}
+
 .card{
-  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--card);
+  border:1.5px solid var(--brand);          /* CONTORNI ARANCIONI */
+  border-radius:var(--radius);
   padding:16px 16px 18px; margin-bottom:14px;
   box-shadow:0 1px 3px rgba(0,0,0,.04);
 }
 .card h2{margin:2px 0 10px 0; font-size:18px}
 .placeholder{color:var(--muted); padding:10px; border:1px dashed var(--line); border-radius:12px; background:#fcfcfe}
+html.theme-dark .placeholder{ background:#0f1424; }
+
 .kv{list-style:none;padding:0;margin:0}
 .kv li{padding:4px 0;border-bottom:1px dashed var(--line)}
 .kv li:last-child{border-bottom:0}
 .muted{color:var(--muted)}
 .code{background:#0b1020;color:#c9d4ff;padding:10px;border-radius:10px;overflow:auto}
 
+/* Footer */
+.site-footer{
+  border-top:1px solid var(--line);
+  padding:14px 0 22px;
+  color:var(--muted);               /* GRIGIO RICHIESTO */
+  background:transparent;
+  text-align:center;
+}
+.site-footer .container{padding:0 14px}
+
 /* Print */
 @media print{
   .app-header .btn, .app-header .ghost { display:none!important; }
+  #themeToggle{ display:none!important; }
   .app-header{position:static}
   body{background:#fff}
   .card{box-shadow:none}
