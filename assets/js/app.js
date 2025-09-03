@@ -9,14 +9,34 @@ async function loadTxt(path){
   }
 }
 
-/* Inizializzazione header e impostazioni */
+function setupThemeToggle(){
+  const btn = document.getElementById("themeToggle");
+  if(!btn) return;
+  let dark = false; // nessun salvataggio locale
+
+  const sun = btn.querySelector(".sun");
+  const moon = btn.querySelector(".moon");
+
+  function render(){
+    document.documentElement.classList.toggle("theme-dark", dark);
+    if(sun && moon){
+      sun.style.display = dark ? "none" : "inline";
+      moon.style.display = dark ? "inline" : "none";
+    }
+  }
+
+  btn.addEventListener("click", () => { dark = !dark; render(); });
+  render();
+}
+
+/* Inizializzazione header/impostazioni/footer */
 document.addEventListener("DOMContentLoaded", async () => {
   // Titolo
   const title = (await loadTxt("data/site-title.txt")) || "BUGETBOX";
   const titleNode = document.getElementById("siteTitle");
   if (titleNode) titleNode.textContent = title;
   const headTitle = document.querySelector("head > title");
-  if (headTitle) headTitle.textContent = `${title} – Pagina 1`;
+  if (headTitle && !headTitle.textContent.includes(title)) headTitle.textContent = `${title} – Pagina 1`;
 
   // Logo
   const logoUrl = await loadTxt("data/logo-url.txt");
@@ -33,6 +53,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     badge.textContent = (label && date && ver) ? `${label} ${date} • ${ver}` : "Rev —";
   }
 
+  // Repository (footer e pagina Impostazioni)
+  const repo = (await loadTxt("data/repo-name.txt")) || "BudgetBox";
+  const repoSpans = document.querySelectorAll("#repoName");
+  repoSpans.forEach(n => n.textContent = repo);
+  const cfgRepo = document.getElementById("cfgRepo");
+  if (cfgRepo) cfgRepo.textContent = repo;
+
   // Pulsante stampa
   const printBtn = document.getElementById("printBtn");
   if (printBtn){
@@ -46,4 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (cfgLogo) cfgLogo.textContent = logoUrl || "—";
   const cfgRev = document.getElementById("cfgRev");
   if (cfgRev) cfgRev.textContent = (label && date && ver) ? `${label} ${date} • ${ver}` : "—";
+
+  // Tema
+  setupThemeToggle();
 });
