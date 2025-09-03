@@ -32,12 +32,10 @@
       </a>
 
       <button id="themeToggle" class="btn" aria-label="Cambia tema (chiaro/scuro)">
-        <!-- Sole -->
         <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5 5l-1.4-1.4M20.4 20.4 19 19M19 5l1.4-1.4M4.6 20.4 6 19"/>
           <circle cx="12" cy="12" r="4"></circle>
         </svg>
-        <!-- Luna -->
         <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"></path>
         </svg>
@@ -49,9 +47,33 @@
   <main class="container">
     <!-- Sezione 1: Anagrafica -->
     <section class="card">
-      <h2>Anagrafica</h2>
-      <div id="anagrafica" class="placeholder">
-        <em>Qui inseriremo i campi (Cliente, Località, Riferimento, Data, …) con le prossime istruzioni.</em>
+      <div class="card-title">
+        <h2>Anagrafica</h2>
+        <div id="badgeLocalita" class="badge badge-localita">Seleziona una località…</div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="clienteInput">Cliente</label>
+          <input id="clienteInput" type="text" placeholder="Nome cliente" />
+        </div>
+
+        <div class="field">
+          <label for="riferimentoInput">Riferimento</label>
+          <input id="riferimentoInput" type="text" placeholder="Rif. interno / commessa" />
+        </div>
+
+        <div class="field">
+          <label for="localitaSelect">Località</label>
+          <select id="localitaSelect">
+            <option value="">— Seleziona comune (SIGLA) —</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="dataInput">Data</label>
+          <input id="dataInput" type="date" />
+        </div>
       </div>
     </section>
 
