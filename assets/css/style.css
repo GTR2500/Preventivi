@@ -27,6 +27,11 @@ body{
   font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
   color:var(--text);
   background:var(--bg);
+
+  /* Sticky footer */
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
 }
 
 /* Header */
@@ -77,6 +82,9 @@ html.theme-dark .btn{ background:var(--card); }
 .container{max-width:1120px;margin:18px auto;padding:0 14px}
 .container.small{max-width:1120px}
 
+/* il main occupa lo spazio rimanente (per sticky footer) */
+main.container{flex:1 0 auto}
+
 .card{
   background:var(--card);
   border:1.5px solid var(--brand);          /* CONTORNI ARANCIONI */
@@ -85,7 +93,10 @@ html.theme-dark .btn{ background:var(--card); }
   box-shadow:0 1px 3px rgba(0,0,0,.04);
 }
 .card h2{margin:2px 0 10px 0; font-size:18px}
-.placeholder{color:var(--muted); padding:10px; border:1px dashed var(--line); border-radius:12px; background:#fcfcfe}
+.placeholder{
+  color:var(--muted); padding:10px;
+  border:1px dashed var(--line); border-radius:12px; background:#fcfcfe
+}
 html.theme-dark .placeholder{ background:#0f1424; }
 
 .kv{list-style:none;padding:0;margin:0}
@@ -101,6 +112,10 @@ html.theme-dark .placeholder{ background:#0f1424; }
   color:var(--muted);               /* GRIGIO RICHIESTO */
   background:transparent;
   text-align:center;
+
+  /* sticky in basso + font più piccolo */
+  margin-top:auto;
+  font-size:12px;
 }
 .site-footer .container{padding:0 14px}
 
