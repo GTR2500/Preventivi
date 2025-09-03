@@ -14,7 +14,18 @@
     <div class="header-center">
       <h1>Impostazioni</h1>
     </div>
-    <div class="header-right"></div>
+    <div class="header-right">
+      <button id="themeToggle" class="btn" aria-label="Cambia tema (chiaro/scuro)">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5 5l-1.4-1.4M20.4 20.4 19 19M19 5l1.4-1.4M4.6 20.4 6 19"/>
+          <circle cx="12" cy="12" r="4"></circle>
+        </svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"></path>
+        </svg>
+        <span>Tema</span>
+      </button>
+    </div>
   </header>
 
   <main class="container">
@@ -24,18 +35,27 @@
         <li><strong>Titolo sito:</strong> <span id="cfgTitle">—</span></li>
         <li><strong>Logo URL:</strong> <span id="cfgLogo">—</span></li>
         <li><strong>Revisione:</strong> <span id="cfgRev">—</span></li>
+        <li><strong>Repository:</strong> <span id="cfgRepo">—</span></li>
       </ul>
       <p class="muted">
-        Queste impostazioni sono lette da file <code>.txt</code> in <code>/data/</code>.
-        Per modificarle, aggiorna i file nel repository:
+        Le impostazioni sono lette da file <code>.txt</code> in <code>/data/</code>:
       </p>
       <pre class="code">
 data/site-title.txt     (es. BUGETBOX)
 data/logo-url.txt       (URL assoluto immagine logo)
 data/revision.txt       (formato: Rev|26/08/2025|v0.11)
+data/repo-name.txt      (nome repository da mostrare nel footer)
       </pre>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container small">
+      <span id="repoName">BudgetBox</span>
+      <span>&nbsp;©&nbsp;</span>
+      <span>Manuel Zago per Grimaldelli srl</span>
+    </div>
+  </footer>
 
   <script src="assets/js/app.js"></script>
 </body>
