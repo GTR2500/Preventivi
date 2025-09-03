@@ -1,0 +1,38 @@
+name: Update revision badge
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set timezone to Europe/Rome
+        run: echo "TZ=Europe/Rome" >> $GITHUB_ENV
+
+      - name: Update data/revision.txt
+        run: |
+          DATE=$(date +'%d/%m/%Y')
+          SHA=$(git rev-parse --short HEAD)
+          echo "Rev|$DATE|$SHA" > data/revision.txt
+
+      - name: Commit & push change
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/revision.txt
+            git commit -m "chore: update revision badge: $(date +'%d/%m/%Y') • $(git rev-parse --short HEAD)"
+            git push
+          fi
